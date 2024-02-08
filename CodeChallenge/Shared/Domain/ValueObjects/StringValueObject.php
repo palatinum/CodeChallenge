@@ -4,7 +4,7 @@ namespace CodeChallenge\Shared\Domain\ValueObjects;
 
 abstract class StringValueObject
 {
-    protected string|null $value;
+    protected ?string $value;
 
     /**
      * @param string|null $value

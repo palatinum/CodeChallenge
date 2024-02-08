@@ -2,88 +2,108 @@
 
 namespace CodeChallenge\Lead\Domain;
 
-use CodeChallenge\Lead\Domain\ValueObject\Email;
 use CodeChallenge\Lead\Domain\ValueObject\LeadId;
-use CodeChallenge\Lead\Domain\ValueObject\Name;
-use CodeChallenge\Lead\Domain\ValueObject\Phone;
+use CodeChallenge\Lead\Domain\ValueObject\MortgageRequestAmount;
+use CodeChallenge\Lead\Domain\ValueObject\PurposeMortgage;
 use CodeChallenge\Lead\Domain\ValueObject\Score;
+use CodeChallenge\Shared\Domain\Client\ClientId;
+use CodeChallenge\Shared\Domain\ValueObjects\Email;
 
 class Lead
 {
     /**
      * @var LeadId
      */
-    private LeadId $id;
+    private LeadId $leadId;
     /**
-     * @var Name
+     * @var ClientId
      */
-    private Name $name;
+    private ClientId $clientId;
     /**
      * @var Email
      */
     private Email $email;
     /**
-     * @var Phone
+     * @var MortgageRequestAmount
      */
-    private Phone $phone;
-
+    private MortgageRequestAmount $mortgageRequestAmount;
+    /**
+     * @var PurposeMortgage
+     */
+    private PurposeMortgage $purposeMortgage;
     /**
      * @var Score
      */
     private Score $score;
 
-    public function __construct(Name $name, Email $email, Phone $phone)
+    /**
+     * @param ClientId $clientId
+     * @param Email $email
+     * @param MortgageRequestAmount $mortgageRequestAmount
+     * @param PurposeMortgage $purposeMortgage
+     */
+    public function __construct(
+        ClientId $clientId,
+        Email $email,
+        MortgageRequestAmount $mortgageRequestAmount,
+        PurposeMortgage $purposeMortgage,
+    )
     {
-        $this->name = $name;
+        $this->leadId = LeadId::create();
+        $this->clientId = $clientId;
         $this->email = $email;
-        $this->phone = $phone;
+        $this->mortgageRequestAmount = $mortgageRequestAmount;
+        $this->purposeMortgage = $purposeMortgage;
+        $this->score = Score::create();
     }
 
     /**
-     * @param Name $name
+     * @param ClientId $clientId
      * @param Email $email
-     * @param Phone $phone
-     * @return Lead
+     * @param MortgageRequestAmount $mortgageRequestAmount
+     * @param PurposeMortgage $purposeMortgage
+     * @return self
      */
     public static function create (
-        Name $name,
+        ClientId $clientId,
         Email $email,
-        Phone $phone,
+        MortgageRequestAmount $mortgageRequestAmount,
+        PurposeMortgage $purposeMortgage,
     ): Lead
     {
-        return new self($name, $email, $phone);
+        return new self($clientId, $email, $mortgageRequestAmount, $purposeMortgage);
     }
 
     /**
      * @return LeadId
      */
-    public function getId(): LeadId
+    public function getLeadId(): LeadId
     {
-        return $this->id;
+        return $this->leadId;
     }
 
     /**
-     * @param LeadId $id
+     * @param LeadId $leadId
      */
-    public function setId(LeadId $id): void
+    public function setLeadId(LeadId $leadId): void
     {
-        $this->id = $id;
+        $this->leadId = $leadId;
     }
 
     /**
-     * @return Name
+     * @return ClientId
      */
-    public function getName(): Name
+    public function getClientId(): ClientId
     {
-        return $this->name;
+        return $this->clientId;
     }
 
     /**
-     * @param Name $name
+     * @param ClientId $clientId
      */
-    public function setName(Name $name): void
+    public function setClientId(ClientId $clientId): void
     {
-        $this->name = $name;
+        $this->clientId = $clientId;
     }
 
     /**
@@ -103,19 +123,35 @@ class Lead
     }
 
     /**
-     * @return Phone
+     * @return MortgageRequestAmount
      */
-    public function getPhone(): Phone
+    public function getMortgageRequestAmount(): MortgageRequestAmount
     {
-        return $this->phone;
+        return $this->mortgageRequestAmount;
     }
 
     /**
-     * @param Phone $phone
+     * @param MortgageRequestAmount $mortgageRequestAmount
      */
-    public function setPhone(Phone $phone): void
+    public function setMortgageRequestAmount(MortgageRequestAmount $mortgageRequestAmount): void
     {
-        $this->phone = $phone;
+        $this->mortgageRequestAmount = $mortgageRequestAmount;
+    }
+
+    /**
+     * @return PurposeMortgage
+     */
+    public function getPurposeMortgage(): PurposeMortgage
+    {
+        return $this->purposeMortgage;
+    }
+
+    /**
+     * @param PurposeMortgage $purposeMortgage
+     */
+    public function setPurposeMortgage(PurposeMortgage $purposeMortgage): void
+    {
+        $this->purposeMortgage = $purposeMortgage;
     }
 
     /**
@@ -128,7 +164,6 @@ class Lead
 
     /**
      * @param Score $score
-     * @return void
      */
     public function setScore(Score $score): void
     {
@@ -138,13 +173,14 @@ class Lead
     /**
      * @return array
      */
-    public function serializetoArray(): array
+    public function serializeArray(): array
     {
         return [
-            'id' => $this->id->value(),
-            'name' => $this->name->value(),
+            'id' => $this->leadId->value(),
+            'client_id' => $this->clientId->value(),
             'email' => $this->email->value(),
-            'phone' => $this->phone->value(),
+            'mortgage_request_amount' => $this->mortgageRequestAmount->value(),
+            'purpose_mortgage' => $this->purposeMortgage->value(),
             'score' => $this->score->value(),
         ];
     }

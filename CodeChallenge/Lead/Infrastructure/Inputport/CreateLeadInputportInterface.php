@@ -6,9 +6,17 @@ use CodeChallenge\Lead\Domain\Lead;
 
 interface CreateLeadInputportInterface
 {
+    /**
+     * @param int $clientId
+     * @param string $email
+     * @param int $mortgageRequestAmount
+     * @param string $purposeMortgage
+     * @return Lead
+     */
     public function __invoke(
-        string $name,
+        int $clientId,
         string $email,
-        string $phone = null
+        int $mortgageRequestAmount,
+        string $purposeMortgage,
     ): Lead;
 }

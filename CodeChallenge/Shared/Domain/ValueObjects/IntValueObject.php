@@ -4,19 +4,19 @@ namespace CodeChallenge\Shared\Domain\ValueObjects;
 
 abstract class IntValueObject
 {
-    protected int $value;
+    private ?int $value;
 
     /**
-     * @param int $value
+     * @param int|null $value
      */
-    public function __construct(int $value) {
+    public function __construct(int $value = null) {
         $this->value = $value;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    final public function value(): int
+    final public function value(): ?int
     {
         return $this->value;
     }

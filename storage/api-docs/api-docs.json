@@ -1,0 +1,505 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "CodeChallenge API REST",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/client": {
+            "post": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "Create Client",
+                "operationId": "b7ea46f0e193429d348955c8ae51e2b3",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "phone": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "John",
+                                    "email": "john@test.com",
+                                    "phone": "66666666"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "John"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "john@test.com"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "66666666"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "The name field is required."
+                                            },
+                                            "collectionFormat": "multi"
+                                        },
+                                        "email": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "The name email is required."
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/lead": {
+            "post": {
+                "tags": [
+                    "Lead"
+                ],
+                "summary": "Create Lead",
+                "operationId": "3a80f8a0f9cf08bee0664d78f94ae0e5",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "client_id": {
+                                                "type": "integer"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "mortgage_request_amount": {
+                                                "type": "integer"
+                                            },
+                                            "purpose_mortgage": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "client_id": 1,
+                                    "email": "john@test.com",
+                                    "mortgage_request_amount": 123,
+                                    "purpose_mortgage": "primera-vivienda"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "client_id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "john@test.com"
+                                        },
+                                        "mortgage_request_amount": {
+                                            "type": "integer",
+                                            "example": 123
+                                        },
+                                        "purpose_mortgage": {
+                                            "type": "string",
+                                            "example": "primera-vivienda"
+                                        },
+                                        "score": {
+                                            "type": "integer",
+                                            "example": 100
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "client_id": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "The client id field is required."
+                                            },
+                                            "collectionFormat": "multi"
+                                        },
+                                        "email": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "The email field is required."
+                                            },
+                                            "collectionFormat": "multi"
+                                        },
+                                        "mortgage_request_amount": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "The mortgage request amount field is required."
+                                            },
+                                            "collectionFormat": "multi"
+                                        },
+                                        "purpose_mortgage": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "The purpose mortgage field is required."
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/lead/{leadId}": {
+            "get": {
+                "tags": [
+                    "Lead"
+                ],
+                "summary": "Get Lead By Id",
+                "operationId": "bf307599028daa9eba3ee90b58085ced",
+                "parameters": [
+                    {
+                        "name": "leadId",
+                        "in": "path",
+                        "description": "Unique identifier for lead, eg; 1",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "client_id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "john@test.com"
+                                        },
+                                        "mortgage_request_amount": {
+                                            "type": "integer",
+                                            "example": 123
+                                        },
+                                        "purpose_mortgage": {
+                                            "type": "string",
+                                            "example": "primera-vivienda"
+                                        },
+                                        "score": {
+                                            "type": "integer",
+                                            "example": 100
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Lead not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Lead"
+                ],
+                "summary": "Update Lead",
+                "operationId": "8de2341a288e0e0b672ce3f4c1f48eb9",
+                "parameters": [
+                    {
+                        "name": "leadId",
+                        "in": "path",
+                        "description": "Unique identifier for lead, eg; 1",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "mortgage_request_amount": {
+                                                "type": "integer"
+                                            },
+                                            "purpose_mortgage": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "mortgage_request_amount": 123,
+                                    "purpose_mortgage": "segunda-vivienda"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "client_id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "john@test.com"
+                                        },
+                                        "mortgage_request_amount": {
+                                            "type": "integer",
+                                            "example": 123
+                                        },
+                                        "purpose_mortgage": {
+                                            "type": "string",
+                                            "example": "segunda-vivienda"
+                                        },
+                                        "score": {
+                                            "type": "integer",
+                                            "example": 123
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "mortgage_request_amount": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "The mortgage request amount field is required."
+                                            },
+                                            "collectionFormat": "multi"
+                                        },
+                                        "purpose_mortgage": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "The purpose mortgage field is required."
+                                            },
+                                            "collectionFormat": "multi"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Lead"
+                ],
+                "summary": "Delete Lead",
+                "operationId": "45d11acf23fcec3a6fc2f68aabe0699f",
+                "parameters": [
+                    {
+                        "name": "leadId",
+                        "in": "path",
+                        "description": "Unique identifier for lead, eg; 1",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "deleted": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/lead/form": {
+            "get": {
+                "tags": [
+                    "Lead"
+                ],
+                "summary": "Get Create Lead Form",
+                "operationId": "f7a5dc990654c211f2a42759551c06ba",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "name"
+                                            },
+                                            "label": {
+                                                "type": "string",
+                                                "example": "Full name"
+                                            },
+                                            "placeholder": {
+                                                "type": "string",
+                                                "example": "Enter full name"
+                                            },
+                                            "type": {
+                                                "type": "string",
+                                                "example": "text"
+                                            },
+                                            "validationType": {
+                                                "type": "string",
+                                                "example": "string"
+                                            },
+                                            "value": {
+                                                "type": "string",
+                                                "example": "John"
+                                            },
+                                            "validations": {
+                                                "type": "string",
+                                                "example": "[]"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Rule;
 
 class CreateLeadRequest extends FormRequest
 {
@@ -14,9 +15,13 @@ class CreateLeadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:leads',
-            'phone' => 'nullable|string|max:20',
+            'client_id' => 'required|integer|exists:clients,id',
+            'email' => 'required|email|max:255',
+            'mortgage_request_amount' => 'required|integer',
+            'purpose_mortgage' => [
+                'required',
+                Rule::in(['primera-vivienda', 'segunda-vivienda'])
+            ],
         ];
     }
 

@@ -2,15 +2,15 @@
 
 namespace CodeChallenge\Lead\Domain\ValueObject;
 
-use CodeChallenge\Shared\Domain\ValueObjects\StringValueObject;
+use CodeChallenge\Shared\Domain\ValueObjects\IntValueObject;
 
-class LeadId extends StringValueObject
+class LeadId extends IntValueObject
 {
     /**
-     * @param string $leadId
+     * @param int|null $leadId
      * @return LeadId
      */
-    public static function create (string $leadId): LeadId
+    public static function create (int $leadId = null): LeadId
     {
         return new self($leadId);
     }

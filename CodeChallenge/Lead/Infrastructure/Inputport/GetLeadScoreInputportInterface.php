@@ -7,5 +7,9 @@ use CodeChallenge\Lead\Domain\ValueObject\Score;
 
 interface GetLeadScoreInputportInterface
 {
+    /**
+     * @param Lead $lead
+     * @return Score
+     */
     public function __invoke(Lead $lead): Score;
 }

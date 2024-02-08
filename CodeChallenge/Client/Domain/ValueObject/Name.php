@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeChallenge\Lead\Domain\ValueObject;
+namespace CodeChallenge\Client\Domain\ValueObject;
 
 use CodeChallenge\Shared\Domain\ValueObjects\StringValueObject;
 

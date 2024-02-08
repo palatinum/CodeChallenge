@@ -1,8 +1,6 @@
 <?php
 
-namespace CodeChallenge\Lead\Domain\ValueObject;
-
-use CodeChallenge\Shared\Domain\ValueObjects\StringValueObject;
+namespace CodeChallenge\Shared\Domain\ValueObjects;
 
 class Email extends StringValueObject
 {

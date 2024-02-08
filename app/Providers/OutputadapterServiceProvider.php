@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use CodeChallenge\Client\Infrastructure\Outputadapter\Eloquent\ClientRepository;
+use CodeChallenge\Client\Infrastructure\Outputport\ClientRepositoryInterface;
 use CodeChallenge\Lead\Infrastructure\Outputadapter\Eloquent\LeadRepository;
 use CodeChallenge\Lead\Infrastructure\Outputadapter\Services\GetLeadScoreService;
 use CodeChallenge\Lead\Infrastructure\Outputport\LeadRepositoryOutputportInterface;
@@ -19,5 +21,6 @@ class OutputadapterServiceProvider extends ServiceProvider
     {
         $this->app->bind(LeadRepositoryOutputportInterface::class, LeadRepository::class);
         $this->app->bind(GetLeadScoreServiceOutputportInterface::class, GetLeadScoreService::class);
+        $this->app->bind(ClientRepositoryInterface::class, ClientRepository::class);
     }
 }

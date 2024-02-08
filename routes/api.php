@@ -1,8 +1,12 @@
 <?php
 
+use CodeChallenge\Client\Infrastructure\Inputadapter\Http\APIRest\CreateClientController;
+use CodeChallenge\Lead\Infrastructure\Inputadapter\Http\APIRest\CreateLeadController;
+use CodeChallenge\Lead\Infrastructure\Inputadapter\Http\APIRest\DeleteLeadController;
+use CodeChallenge\Lead\Infrastructure\Inputadapter\Http\APIRest\GetCreateLeadFormController;
+use CodeChallenge\Lead\Infrastructure\Inputadapter\Http\APIRest\GetLeadByIdController;
+use CodeChallenge\Lead\Infrastructure\Inputadapter\Http\APIRest\UpdateLeadController;
 use Illuminate\Support\Facades\Route;
-
-use CodeChallenge\Lead\Infrastructure\Inputadapter\Http\CreateLeadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +20,11 @@ use CodeChallenge\Lead\Infrastructure\Inputadapter\Http\CreateLeadController;
 */
 
 Route::post('/lead', CreateLeadController::class);
+Route::get('/lead/form', GetCreateLeadFormController::class);
+Route::get('/lead/create', GetCreateLeadFormController::class);
+Route::get('/lead/{leadId}', GetLeadByIdController::class);
+Route::put('/lead/{leadId}', UpdateLeadController::class);
+Route::delete('/lead/{leadId}', DeleteLeadController::class);
+
+Route::post('/client', CreateClientController::class);
 
