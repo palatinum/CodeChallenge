@@ -1,66 +1,79 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><img src="./logo.jpg"></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+## CodeChallenge: Desarrollo de Aplicación con PHP (Laravel).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+¡Bienvenido/a al repositorio de mi prueba técnica para el puesto de programador PHP (Laravel)! En este repositorio, encontrarás el código fuente y la documentación correspondiente a la aplicación desarrollada como parte del proceso de selección.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Descripción del Proyecto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Este proyecto consiste en el desarrollo de una API REST utilizando el framework PHP Laravel. La aplicación tiene como objetivo el CRUD del recurso "Lead".
 
-## Learning Laravel
+### Características Principales
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Arquitectura Hexagonal.
+- Test unitarios y de integracion.
+- Docker.
+- Swagger.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Estructura del proyecto
+La estructura es la de una aplicación Laravel, incluyendo un directorio en raiz llamado "CodeChallenge".
+En este directorio existen 2 dominios, Lead y CLient, los cuales tienen la siguiente estructura:
+- Application: Casos de uso, donde se implementa la lógica.
+- Domain: Dominio, donde se define la lógica.
+- Intrastructure: Componentes, recursos y servicios que la aplicación necesita para funcionar.
+  - Inputadapter: Componentes que implementan los Inputport para la entrada de datos.
+  - Inputport: Interfaces para entrada de datos.  
+  - Outputadapter: Componentes que implementan los Outputport para la salida de datos.
+  - Outputport: Interfaces para salida de datos.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+En el siguiente gráfico se puede ver cómo funciona la arquitecrura hexagonal, con el ejemplo del dominio Lead.
+<img src="./hexagonal-architecture.png">
 
-## Laravel Sponsors
+(lo se, no es un hexagono...)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- En ![rojo](https://placehold.co/15x15/a53a3a/a53a3a.png) `ROJO` tenemos el dominio (Lead), totalmente aislado y sin ninguna dependencia.
+- En ![verde](https://placehold.co/15x15/3a9563/3a9563.png) `VERDE` Tenemos Application (CreateLeadUseCase), los casos de uso, que hace uso de los puertos de salida (LeadRepositoryOutputportInterface).
+- En ![morado](https://placehold.co/15x15/835ed0/835ed0.png) `MORADO`, los puertos (interfaces), que hacen funcion de "cortafuegos".
+  - Puerto de entrada (CreateLeadInputportInterface) que es implementado por el caso de uso (CreateLeadUseCase).
+  - Puerto de salida (LeadRepositoryOutputportInterface) que es implementado por el adaptador de salida (LeadRepository)
+- En ![azul](https://placehold.co/15x15/677faf/677faf.png) `AZUL`, los adaptadores (clases concretas).
+  - Adaptador de entrada (CreateLeadController) que hace uso del puerto de entrada (CreateLeadInputportInterface).
+  - Adaptador de salida (LeadRepository) que es implementado por el puerto de salida (LeadRepositoryOutputportInterface).
 
-### Premium Partners
+Esto no hay quien lo entienda, ¿verdad?, vamos a verlo en una caso práctico, crear un "Lead".
+Todo empieza con las rutas de Laravel que usarán un Controlador:
+1. Se usa el CreateLeadController
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+   Este controlador usa el puerto de entrada, usa la interfaz CreateLeadInputportInterface, no usa una clase concreta.
+2. Esta interfaz es implementada por el caso de uso CreateLeadUseCase que hace uso del puerto de salida, la interfaz LeadRepositoryOutputportInterface, no usa una clase concreta.
+3. Este puerto de salida es implementado por el adaptador de salida LeadRepository.
 
-## Contributing
+Para hacer uso de todas estas interfaces usamos el mágico [Service Container de Laravel](https://laravel.com/docs/10.x/container) que nos ayuda a inyectar interfaces.
+Haciendo un "bind" podemos indicar que cuando se inyecte una interfaz determinada se instancie una clase concreta:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<img src="./service-provider.jpg">
 
-## Code of Conduct
+### Requisitos del proyecto
+- Git
+- Docker
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### ¿Cómo lo ponemos en marcha?
+1. Abrir una terminal.
+2. Descargar el repositorio: `git clone https://github.com/palatinum/CodeChallenge.git`
+3. Entrar en el directorio del proyecto: `cd CodeChallenge`
+4. Crear el .env: `cp .env.example .env`
+5. Ejecutar docker: `docker compose up -d`
+6. Ejecutar la instalacion de dependencias: `docker exec -it cc-app composer install`
+7. Ejecutar migraciones: `docker exec -it cc-app php artisan migrate`
+8. Abrir en el navegador la [documentación](http://localhost/api/documentation).
 
-## Security Vulnerabilities
+### Testing
+Tests unitarios: tests/Unit/CodeChallenge/Lead/Domain/LeadTest.php
+Tests de integración: tests/Feature/CodeChallenge/Lead/Infrastructure/Inputadapter/Http/APIRest/CreateLeadControllerTest.php
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Solo hay tests unitarios para la Clase Lead (Dominio) y tests de integración de la clase CreateLeadController (adaptador de entrada).
 
-## License
+#### ¿Cómo ejecutar los tests?
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Ejecutar en la terminar: `docker exec -it cc-app vendor/bin/phpunit`

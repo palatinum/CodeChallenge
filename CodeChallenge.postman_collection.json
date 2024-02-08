@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "d1b78c56-6426-40f2-a4ec-b08128ee4918",
+		"name": "CodeChallenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9428357"
+	},
+	"item": [
+		{
+			"name": "Lead",
+			"item": [
+				{
+					"name": "CreateLead",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/lead?client_id=1&email=testing@testing.com&mortgage_request_amount=123&purpose_mortgage=primera-vivienda",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"lead"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "1"
+								},
+								{
+									"key": "email",
+									"value": "testing@testing.com"
+								},
+								{
+									"key": "mortgage_request_amount",
+									"value": "123"
+								},
+								{
+									"key": "purpose_mortgage",
+									"value": "primera-vivienda"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLeadById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/lead/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"lead",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCreateLeadForm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/lead/form",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"lead",
+								"form"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateLead",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/lead/1?mortgage_request_amount=321&purpose_mortgage=segunda-vivienda",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"lead",
+								"1"
+							],
+							"query": [
+								{
+									"key": "mortgage_request_amount",
+									"value": "321"
+								},
+								{
+									"key": "purpose_mortgage",
+									"value": "segunda-vivienda"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteLead",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/lead/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"lead",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "CreateClient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/client?name=testing&email=testing@testing.com&phone=666666666",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"client"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "testing"
+								},
+								{
+									"key": "email",
+									"value": "testing@testing.com"
+								},
+								{
+									"key": "phone",
+									"value": "666666666"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
